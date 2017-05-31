@@ -1,6 +1,6 @@
 {
     "name"          : "jemdev/chiffrement",
-    "version"       : "1.0",
+    "version"       : "1.0.0",
     "description"   : "chiffrement de données",
     "keywords"      : ["chiffrement", "mcrypt"],
     "license"       : "CECILL-2.0",
