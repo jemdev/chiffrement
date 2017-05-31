@@ -13,7 +13,7 @@ namespace jemdev\chiffrement;
  * sur Lumadis.be : {@link http://www.lumadis.be/dvp/crypt/tuto_crypt.php}
  *
  * @author      Jean Molliné <jmolline@gmail.com>
- * @version     2005.02.10
+ * @version     1.0
  * @package     jemdev
  * @subpackage  crypt
  * @copyright   Jean Molliné 2006
