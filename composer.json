@@ -1,5 +1,22 @@
 {
-    "autoload": {
+    "name"          : "jemdev/chiffrement",
+    "description"   : "chiffrement de données",
+    "keywords"      : ["chiffrement", "mcrypt"],
+    "license"       : "CECILL-2.0",
+    "type"          : "library",
+    "authors"       : [
+        {
+            "name": "Jean Molliné",
+            "email": "jmolline@gmail.com"
+        }
+    ],
+    "require"       : {
+        "php": ">=5.4.0"
+    },
+    "autoload"      : {
+        "psr-4": {
+            "jemdev\\chiffrement\\": "."
+        },
         "classmap": [
             "crypt.php",
             "Exception.php",
