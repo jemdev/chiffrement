@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "classmap": [
+            "crypt.php",
+            "Exception.php",
+            "locale/fr.php",
+            "locale/en.php"
+        ]
+    }
+}
