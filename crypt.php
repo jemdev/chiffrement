@@ -85,7 +85,7 @@ class crypt
      * @param   String  $locale         Langue pour les messages d'erreur.
      * @param   String  $iv             Vecteur d'initialisation (facultatif, ne sert que pour déchiffrer)
     */
-    public function __construct($grainDeSel, $algo = "rijndael-256", $mode = "nofb", $vecteur = "rand", $locale = 'fr', $iv = null)
+    public function __construct($grainDeSel, $algo = "rijndael-256", $mode = "nofb", $vecteur = "rand", $locale = 'fr')
     {
         $this->_locale  = $locale;
         $this->_setMessagesException();
@@ -94,7 +94,6 @@ class crypt
             $msg = sprintf($this->_aMsgsExceptions['extension_mcrypt_absente'], __CLASS__);
             throw new Exception($msg, E_USER_ERROR);
         }
-        $iv = (!is_null($iv)) ? $iv : 'rand';
         /**
          * Récupération des algorithmes et modes de chiffrement disponibles.
          */
@@ -106,7 +105,7 @@ class crypt
         */
         $this->_setAlgo($algo);
         $this->_setMode($mode);
-        $this->_setVecteur($iv);
+        $this->_setVecteur($vecteur);
 
         /**
          * Initialisation de l'instance elle-même.
@@ -294,20 +293,20 @@ class crypt
 
     private function _init($cle)
     {
-        $this->td   = mcrypt_module_open($this->_algo, '', $this->_mode, '');
-        $this->ks   = mcrypt_enc_get_key_size($this->td);
-        $this->_grainDeSel = substr(md5($cle), 0, $this->ks);
+        $this->td           = mcrypt_module_open($this->_algo, '', $this->_mode, '');
+        $this->ks           = mcrypt_enc_get_key_size($this->td);
+        $this->_grainDeSel  = substr(md5($cle), 0, $this->ks);
     }
 
     private function _setMessagesException()
     {
-        $reploc         = realpath(dirname(__FILE__)) . DS . "locale";
-        $msgs_locale    = $reploc . DS . $this->_locale .".php";
+        $reploc         = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "locale";
+        $msgs_locale    = $reploc . DIRECTORY_SEPARATOR . $this->_locale .".php";
         if(!file_exists($msgs_locale))
         {
-            $msgs_locale = $reploc . DS ."fr.php";
+            $msgs_locale = $reploc . DIRECTORY_SEPARATOR ."fr.php";
         }
-        include_once($msgs_locale);
+        include($msgs_locale);
         $this->_aMsgsExceptions = $msgs_exceptions;
     }
 }
