@@ -8,6 +8,7 @@
 - Contact :     [Message][]
 - GitHub :      [github.com/jemdev/chiffrement][]
 - Packagist :   [packagist.org/packages/jemdev/chiffrement][]
+- deprecated 
 ****
 Permet une utilisation facile de la librairie mcrypt.
 
