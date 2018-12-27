@@ -4,6 +4,7 @@
 - Licence:      [CeCILL V2][]
 - Pré-Requis: 
   - PHP >= 5.4
+  - PHP < 7.1
 - Contact :     [Message][]
 - GitHub :      [github.com/jemdev/chiffrement][]
 - Packagist :   [packagist.org/packages/jemdev/chiffrement][]
@@ -11,6 +12,11 @@
 Permet une utilisation facile de la librairie mcrypt.
 
 Classe réalisée suite a un très bon didactitiel d'introduction au chiffrage avec la librairie de chiffrement mcrypt posté par Ripat sur [Lumadis.be][]
+****
+
+#Note importante
+Attention, l'extension mcrypt devient obsolète à partir de PHP 7.1 et sera prochainement retirée, ce qui veut dire que ce package deviendra inutilisable.
+Un remplacement par l'utilisation de l'extension OpenSSL est en cours de développement.
 ****
 
 # Utilisation
@@ -21,7 +27,7 @@ L'utilisation est des plus simples. À partir d'une instance de *jemdev\chiffrem
 
 Le constructeur de la classe ne requiert que le premier paramètre indiquant un *grain-de-seul*, chaine de caractère qui sera utilisée dans la phase de chiffrement. On peut ensuite indiquer :
 
-- l'algorithme de chiffrement : par défaut, on utiliser *rijndael-256*;
+- l'algorithme de chiffrement : par défaut, on utilisera *rijndael-256*;
 - Le mode de chiffrement : par défaut, *nofb*;
 - Un vecteur d'initialisation, par défaut *rand*;
 - La langue utilisée pour les messages d'erreur, par défaut *fr* affichera les erreur en français. L'anglais est également disponible (*en*).
