@@ -8,7 +8,7 @@
 - GitHub :      [github.com/jemdev/chiffrement][]
 - Packagist :   [packagist.org/packages/jemdev/chiffrement][]
 ****
-## Attention, librairie jemdev\chiffrement\crypt obsolète
+## Attention, classe jemdev\chiffrement\crypt obsolète
 La classe jemdev\chiffrement\crypt de cette librairie est obsolète : l'extension mcrypt devient obsolète à partir de PHP 7.1 et sera retirée dès la version 7.2, ce qui veut dire que ce package deviendra inutilisable.
 Un remplacement par l'utilisation de l'extension OpenSSL est désormais disponible avec la classe jemdev\chiffrement\cryptopenssl.
 ****
