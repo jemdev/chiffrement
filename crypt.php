@@ -17,8 +17,10 @@ namespace jemdev\chiffrement;
  * @package     jemdev
  * @subpackage  crypt
  * @copyright   Jean Molliné 2006
+ * @deprecated  Cette classe utilise l'extension mcrypt qui a été retirée de PHP à partir de
+ *              la version 7.2. Considérez l'utilisation de la classe cryptopenssl de cette librairie.
  */
-class crypt
+class crypt implements cryptInterface
 {
     /**
      * Algorithme utilise
@@ -70,7 +72,7 @@ class crypt
      * - La chaine chiffrée.
      *
      * Si on le souhaite, on peut envoyer « null » pour vecteur lors du chiffrement
-     * et faire appel à la méthode jem_chiffrement_crypt::getVecteur lors du chiffrement.
+     * et faire appel à la méthode jem\chiffrement\crypt::getVecteur lors du chiffrement.
      * Dans ce cas, le vecteur sera une chaine aléatoire, ce qui augmente encore la
      * sécurité. Ainsi, chaque nouvelle instance utilisant un vecteur différent, il sera
      * alors totalement improbable d'imaginer qu'on puisse récupérer le contenu original
@@ -91,7 +93,22 @@ class crypt
         $this->_setMessagesException();
         if(false === extension_loaded('mcrypt'))
         {
-            $msg = sprintf($this->_aMsgsExceptions['extension_mcrypt_absente'], __CLASS__);
+            $pv = phpversion();
+            if(false !== $pv)
+            {
+                if($pv <= 7.1)
+                {
+                    $msg = sprintf($this->_aMsgsExceptions['extension_mcrypt_absente'], __CLASS__);
+                }
+                else
+                {
+                    $msg = sprintf($this->_aMsgsExceptions['extension_mcrypt_obsolete'], $pv);
+                }
+            }
+            else
+            {
+                $msg = sprintf($this->_aMsgsExceptions['extension_mcrypt_absente_phpv'], __CLASS__);
+            }
             throw new Exception($msg, E_USER_ERROR);
         }
         /**
@@ -103,9 +120,9 @@ class crypt
         /**
          * Initialisation des paramètres de configuration de l'instance.
         */
-        $this->_setAlgo($algo);
+        $this->setAlgo($algo);
         $this->_setMode($mode);
-        $this->_setVecteur($vecteur);
+        $this->setVecteur($vecteur);
 
         /**
          * Initialisation de l'instance elle-même.
@@ -118,7 +135,7 @@ class crypt
      */
     public function __toString()
     {
-        $msg  = "Algorithme de chiffrage/d&eacute;chiffrage utilis&eacute; : ".$this->_getAlgo()."<br />";
+        $msg  = "Algorithme de chiffrage/d&eacute;chiffrage utilis&eacute; : ".$this->getAlgo()."<br />";
         $msg .= "Mode de chiffrement utilis&eacute; : ".$this->_getMode()."<br />";
         $msg .= "Vecteur d'initialisation cr&eacute;&eacute;/utilis&eacute; : ".$this->getVecteur();
         return $msg;
@@ -194,7 +211,7 @@ class crypt
      * Renvoie le nom de l'algorythme de chiffrement/dechiffrement en cours d'utilisation
      * @return String
      */
-    private function _getAlgo()
+    public function getAlgo()
     {
         return $this->_algo;
     }
@@ -204,7 +221,7 @@ class crypt
      *
      * @param String $algo
      */
-    private function _setAlgo($algo = null)
+    public function setAlgo($algo = null)
     {
         $this->_algo = (!isset($algo) || !in_array($algo, $this->_aAlgosEncryption)) ? MCRYPT_RIJNDAEL_256 : $algo;
     }
@@ -269,7 +286,7 @@ class crypt
      *
      * @param   String  $vecteur    Vecteur à utiliser
      */
-    private function _setVecteur($vecteur)
+    public function setVecteur($vecteur)
     {
         if($vecteur === 'rand')
         {

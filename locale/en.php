@@ -1,7 +1,7 @@
 <?php
 namespace jemdev\chiffrement;
 /**
- * @package     jem
+ * @package     jemdev\chiffrement
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -17,6 +17,10 @@ namespace jemdev\chiffrement;
  * @version  English
  */
 $msgs_exceptions = array(
-    'extension_mcrypt_absente'      => "mcrypt extension is required and must be activated in your PHP configuration to use %s.",
-    'longueur_vecteur_init'         => "The size of itinialisation vector must be equal to %s"
+    'extension_mcrypt_absente'      => "The mcrypt extension is required in PHP configuration to use %s.",
+    'extension_openssl_absente'     => "openssl extension is required in PHP configuration to use %s.",
+    'extension_mcrypt_absente_phpv' => "The mcrypt extension is required in PHP configuration to use %s. Warning, your PHP version could not be determined, the mcrypt class is disabled after PHP version 7.1",
+    'algo_inconnu'                  => "Algorithm « %s » unknown, it was not listed in the list available for OpenSSL. Available algorithms : %s",
+    'extension_mcrypt_obsolete'     => "The mcrypt extension is no longer active in your PHP version (%s). Consider updating this library to version 2",
+    'longueur_vecteur_init'         => "The length of the itinialization vector must be equal to %s",
 );
