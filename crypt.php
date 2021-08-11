@@ -308,6 +308,33 @@ class crypt implements cryptInterface
         }
     }
 
+    /**
+     * Récupérer la clé de chiffrement en cours d'utilisation.
+     * @return string
+     */
+    public function getGrainDeSel(): string
+    {
+        return $this->_grainDeSel;
+    }
+
+    /**
+     * Définir une clé de chiffrement
+     * @param   string      $grainDeSel
+     * @return  cryptopenssl
+     */
+    public function setGrainDeSel($grainDeSel = null): cryptopenssl
+    {
+        if(!is_null($grainDeSel) && !empty($grainDeSel))
+        {
+            $this->_grainDeSel = $grainDeSel;
+        }
+        else
+        {
+            $this->_grainDeSel = openssl_random_pseudo_bytes($this->_lc);
+        }
+        return $this;
+    }
+
     private function _init($cle)
     {
         $this->td           = mcrypt_module_open($this->_algo, '', $this->_mode, '');

@@ -11,11 +11,6 @@
     <testsuites>
         <testsuite name="Suite de tests jemdev\chiffrement">
             <directory>tests</directory>
-<!--
-            <exclude>
-                <directory>locale</directory>
-            </exclude>
--->
         </testsuite>
     </testsuites>
 </phpunit>
